@@ -1,0 +1,6 @@
+
+cd "insert filepath"
+set more off
+clear all
+capture log close
+
