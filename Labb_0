@@ -11,8 +11,16 @@ destring hours, replace
 generate female = 1 if sex == "F"
 replace female = 0 if missing(female)
 
+tab employment
+tab jobtype
+tab1 employment jobtype
 
+misstable summarize
 
+generate interv_date_DT = date(intervdate, "DMY")
+format interv_date_DT %td
+
+histogram interv_date_DT
 
 
 save OUTPUT_data, replace
