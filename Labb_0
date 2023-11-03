@@ -1,6 +1,19 @@
-
-cd "insert filepath"
 set more off
+cd "C:\Users\anton\OneDrive\Skrivbord\Stata\Labb_0\Data"
 clear all
 capture log close
+log using logfile_lab0.log, replace
 
+use stataintro_data.dta
+
+destring hours, replace
+
+generate female = 1 if sex == "F"
+replace female = 0 if missing(female)
+
+
+
+
+
+save OUTPUT_data, replace
+log close
