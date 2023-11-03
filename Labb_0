@@ -1,3 +1,16 @@
+/* 
+
+LAB 0 Introduction
+
+Uses data: stataintro_data.dta
+Outputs: OUTPUT_data.dta
+		 logfile_lab0.log
+		 
+Last edited:
+Packages needed:
+
+*/
+
 set more off
 cd "C:\Users\anton\OneDrive\Skrivbord\Stata\Labb_0\Data"
 clear all
@@ -6,21 +19,44 @@ log using logfile_lab0.log, replace
 
 use stataintro_data.dta
 
+* Question 3
 destring hours, replace
 
+* Question 4
 generate female = 1 if sex == "F"
 replace female = 0 if missing(female)
 
+* Question 5
 tab employment
 tab jobtype
 tab1 employment jobtype
 
 misstable summarize
 
+* Question 6 
 generate interv_date_DT = date(intervdate, "DMY")
 format interv_date_DT %td
 
 histogram interv_date_DT
+
+gen birth_date = mdy(monb, dayb, yearb)
+format birth_date %td
+
+histogram birth_date
+
+* Change formating to show age in years!!!
+gen age_interv = interv_date_DT - birth_date
+
+* Question 7 - Change first variable?
+
+gen total_inc = grinc_wage + grinc_sempl + grinc_sw + grinc_pens
+la var total_inc "income from all sources"
+
+egen total_inc2 = rowtotal(grinc_wage grinc_sempl grinc_sw grinc_pens)
+
+* Question 8 
+
+reg total_inc2 sex children
 
 
 save OUTPUT_data, replace
