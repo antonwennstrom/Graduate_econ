@@ -2,17 +2,19 @@
 
 LAB 0 Introduction
 
+Filepath needs to be specified.
+
 Uses data: stataintro_data.dta
 Outputs: OUTPUT_data.dta
-		 logfile_lab0.log
+	logfile_lab0.log
 		 
-Last edited:
-Packages needed:
+Last edited: 2023-11-xx
+Packages needed: ??
 
 */
 
 set more off
-cd "C:\Users\anton\OneDrive\Skrivbord\Stata\Labb_0\Data"
+cd "INSERT FILEPATH HERE"
 clear all
 capture log close
 log using logfile_lab0.log, replace
@@ -57,6 +59,28 @@ egen total_inc2 = rowtotal(grinc_wage grinc_sempl grinc_sw grinc_pens)
 * Question 8 
 
 reg total_inc2 sex children
+
+la define satisf_job 1 "not satisfied" 2 "ever so satisfied" 3 "slightly satisfied" 4 "somewhat satisfied" 5 "quite satisfied" 6 "fully satisfied"
+
+la define satisf_fin 1 "not satisfied" 2 "ever so satisfied" 3 "slightly satisfied" 4 "somewhat satisfied" 5 "quite satisfied" 6 "fully satisfied"
+
+* Question 10
+
+twoway scatter hours total_inc2 || lfit hours total_inc2
+
+twoway scatter hours total_inc2 || lfit hours total_inc2 if total_inc2 < 1000 || lfit hours total_inc2 if hours < 70
+
+* Question 11 
+merge m:1 munic using stataintro_munic.dta
+
+* Question 12
+*collapse (count) freq1 = munic if munic == 1
+
+* Question 13
+
+local controls satisf_job satisf_fin
+
+regress total_inc2 hours `controls'
 
 
 save OUTPUT_data, replace
