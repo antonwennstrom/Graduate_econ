@@ -83,9 +83,9 @@ destring intervdate, replace
 gen intervday = int(intervdate/1000000)
 gen intervmonth = int((intervdate - intervday*1000000)/10000)
 gen intervyear = intervdate - intervday*1000000 - intervmonth*10000
-gen interv_date_DT = mdy(intervmonth, intervday, intervyear) 
-format interv_date_DT %td
-histogram interv_date_DT
+gen interv_date_DT1 = mdy(intervmonth, intervday, intervyear) 
+format interv_date_DT1 %td
+histogram interv_date_DT1
 
 gen birth_date = mdy(monb, dayb, yearb)
 format birth_date %td
