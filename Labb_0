@@ -136,6 +136,9 @@ twoway scatter hours total_inc2 || lfit hours total_inc2 if total_inc2 < 1000 ||
 
 * Question 11 
 merge m:1 munic using stataintro_munic.dta
+tabulate rural
+
+/* 125 people live in a rural area. */
 
 * Question 12
 *collapse (count) freq1 = munic if munic == 1
