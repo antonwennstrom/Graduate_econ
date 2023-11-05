@@ -111,6 +111,13 @@ reg total_inc2 sex children
 
 /* As can be shown by the regression, gender has an effect on total income which is significant. Female has a negative coefficiant which means that being a female has a negative effect on total income. */
 
+reg total_inc2 sex children maritalstat
+
+/* The variable "maritalstat" is a catergorical variable taking on number 1 to 5. In order include marriage status as an independent varibale in the regression we need to specify it as a dummy variable where 1 equals married and 0 any other marriage status. */
+
+gen married = (maritalstat == 1)
+reg total_inc2 sex children married
+
 * Question 9
 
 label list
