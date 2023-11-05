@@ -78,7 +78,7 @@ format interv_date_DT %td
 histogram interv_date_DT
 
 /* There are a few incomplete observations for interv_date_DT which is not given as DDMMYYYY. One way to solve the problem is to seperate intervdate into three variables (intervday, intervmonth, intervyear) and use these to create a new variable for the date of interview. */
-**** Har någon bättre lösning så feel free *****
+
 destring intervdate, replace
 gen intervday = int(intervdate/1000000)
 gen intervmonth = int((intervdate - intervday*1000000)/10000)
@@ -91,8 +91,7 @@ gen birth_date = mdy(monb, dayb, yearb)
 format birth_date %td
 histogram birth_date
 
-* Change formating to show age in years!!!
-gen age_interv = interv_date_DT - birth_date
+gen age_interv = intervyear - yearb
 
 * Question 7 - Change first variable?
 
