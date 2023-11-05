@@ -22,10 +22,30 @@ log using logfile_lab0.log, replace
 use stataintro_data.dta
 
 * Question 1
+describe
 
-/*Variable - numeric/string - categorical/not
-
-
+/*Variable - numeric/string (categorical/not)
+id - numerical
+yearb - numerical
+monb - numerical
+dayb - numerical
+intervdate - numerical
+employment - numerical (categorical)
+jobtype - numerical (categorical)
+startjob - numerical
+sector - numerical (categorical)
+hours - string
+grinx_wage - numerical
+mainactivity - numerical (categorical)
+grinc_sempl - numerical
+grinc_sw - numerical
+grinc_pens - numerical
+maritalstat - numerical (categorical)
+satisf_job - numerical (categorical)
+satis_fin - numerical (categorical)
+children - numerical
+sex - string
+munic - numerical
 */
 
 * Question 2 
@@ -38,6 +58,9 @@ destring hours, replace
 * Question 4
 generate female = 1 if sex == "F"
 replace female = 0 if missing(female)
+compare female sex
+
+/* Same number of observations for the variable "female" as the variable "sex" */
 
 * Question 5
 tab employment
@@ -46,15 +69,26 @@ tab1 employment jobtype
 
 misstable summarize
 
+/* The function "misstable summarize" shows the number of missing observations for each variable which is usefull when understanding the data and finding any missing value. */
+
 * Question 6 
 generate interv_date_DT = date(intervdate, "DMY")
 format interv_date_DT %td
 
 histogram interv_date_DT
 
+/* There are a few incomplete observations for interv_date_DT which is not given as DDMMYYYY. One way to solve the problem is to seperate intervdate into three variables (intervday, intervmonth, intervyear) and use these to create a new variable for the date of interview. */
+**** Har någon bättre lösning så feel free *****
+destring intervdate, replace
+gen intervday = int(intervdate/1000000)
+gen intervmonth = int((intervdate - intervday*1000000)/10000)
+gen intervyear = intervdate - intervday*1000000 - intervmonth*10000
+gen interv_date_DT = mdy(intervmonth, intervday, intervyear) 
+format interv_date_DT %td
+histogram interv_date_DT
+
 gen birth_date = mdy(monb, dayb, yearb)
 format birth_date %td
-
 histogram birth_date
 
 * Change formating to show age in years!!!
@@ -67,13 +101,24 @@ la var total_inc "income from all sources"
 
 egen total_inc2 = rowtotal(grinc_wage grinc_sempl grinc_sw grinc_pens)
 
+compare total_inc total_inc2
+
+/* There are six observations missing in total_inc compared to total_inc2. This is due to the fact that the "egen" function treats missing values as 0 while the "gen" function simply returns missing value/no value. */
+
 * Question 8 
 
 reg total_inc2 sex children
 
-la define satisf_job 1 "not satisfied" 2 "ever so satisfied" 3 "slightly satisfied" 4 "somewhat satisfied" 5 "quite satisfied" 6 "fully satisfied"
+* Question 9
 
-la define satisf_fin 1 "not satisfied" 2 "ever so satisfied" 3 "slightly satisfied" 4 "somewhat satisfied" 5 "quite satisfied" 6 "fully satisfied"
+label list
+
+/* There is no value label referring to how satisfied people are with a particular dimension of their life. */
+
+label define satisfaction 1 "not satisfied" 2 "ever so slightly satisfied" 3 "slightly satisfied" 4 "somewhat satisfied" 5 "quite satisfied" 6 "fully satisfied"
+
+label values satisf_job satisfaction
+label values satisf_fin satisfaction
 
 * Question 10
 
