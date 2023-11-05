@@ -109,6 +109,8 @@ compare total_inc total_inc2
 
 reg total_inc2 sex children
 
+/* As can be shown by the regression, gender has an effect on total income which is significant. Female has a negative coefficiant which means that being a female has a negative effect on total income. */
+
 * Question 9
 
 label list
