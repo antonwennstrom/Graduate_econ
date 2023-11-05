@@ -21,6 +21,17 @@ log using logfile_lab0.log, replace
 
 use stataintro_data.dta
 
+* Question 1
+
+/*Variable - numeric/string - categorical/not
+
+
+*/
+
+* Question 2 
+
+/* By observing the data, we see that the variable "hours" is stored as a string variable. The variable cointains the usual amount of hours the interviewed person works in a week which would make more sense to store as a numerical variable. */
+
 * Question 3
 destring hours, replace
 
