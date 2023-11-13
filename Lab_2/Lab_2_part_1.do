@@ -52,5 +52,8 @@ replace most_lectures_dummy = 0 if missing(most_lectures_dummy)
 reg test_score hours_studied most_lectures_dummy
 
 
+* Saving our new data and closing the logfile. 
+
+
 save OUTPUT_part1_data, replace
 log close

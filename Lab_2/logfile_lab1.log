@@ -3,7 +3,7 @@
        log:  /Users/hst17anwe/Documents/gradstata/Graduate_econ/Lab_2/logfile_la
 > b1.log
   log type:  text
- opened on:  13 Nov 2023, 10:44:49
+ opened on:  13 Nov 2023, 11:15:23
 
 . 
 . 
@@ -121,8 +121,10 @@ most_lectur~y |   3.853512   .9809197     3.93   0.000     1.926251    5.780773
 
 . 
 . 
+. * Saving our new data and closing the logfile. 
+. 
+. 
 . save OUTPUT_part1_data, replace
-(file OUTPUT_part1_data.dta not found)
 file OUTPUT_part1_data.dta saved
 
 . log close
@@ -130,5 +132,5 @@ file OUTPUT_part1_data.dta saved
        log:  /Users/hst17anwe/Documents/gradstata/Graduate_econ/Lab_2/logfile_la
 > b1.log
   log type:  text
- closed on:  13 Nov 2023, 10:44:51
+ closed on:  13 Nov 2023, 11:15:26
 --------------------------------------------------------------------------------
