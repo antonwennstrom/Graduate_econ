@@ -25,7 +25,7 @@ log using logfile_lab1.log, replace
 use exam_results.dta
 
 describe
-
+summarize
 * Add some more statistics
 
 
