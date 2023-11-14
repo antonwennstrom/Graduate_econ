@@ -45,9 +45,7 @@ scatter U_hat hours_studied
 * Creating categorical variable and re-running the regression with this new variable. 
 recode hours_studied (38/43 = 0 "little studying") (44/50 = 1 "normal studying") (51/56 = 2 "heavy studying"), generate(hours_studied_cat)
 
-gen heavy_studying = (hours_studied_cat == 2)
-gen normal_studying = (hours_studied_cat == 1)
-gen little_studying = (hours_studied_cat == 0)
+reg test_score i.hours_studied_cat
 
 * Creating a dummy variable for "most_lectures" and then regressing test score on hours study and this new dummy variable. 
 
