@@ -43,6 +43,7 @@ predict U_hat, residuals
 scatter U_hat hours_studied
 
 * Creating categorical variable and re-running the regression with this new variable. 
+recode hours_studied (0/43 = 0 "little studying") (44/50 = 1 "normal studying") (51/56 = 2 "heavy studying"), generate(hours_studied_cat)
 
 * Creating a dummy variable for "most_lectures" and then regressing test score on hours study and this new dummy variable. 
 
