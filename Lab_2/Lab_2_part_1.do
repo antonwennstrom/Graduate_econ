@@ -40,7 +40,7 @@ reg test_score hours_studied
 
 * Storing the values of the residuals and plotting them against hours studied. 
 predict U_hat, residuals
-scatter U_hat hours_studied /* Assumed that he meant hours_studied instead of educ. */
+scatter U_hat hours_studied
 
 * Creating categorical variable and re-running the regression with this new variable. 
 
