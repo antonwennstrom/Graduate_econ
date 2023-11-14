@@ -36,7 +36,8 @@ correlate test_score hours_studied
 reg test_score hours_studied
 
 * Testing our null hypotheses. 
-
+reg test_score hours_studied ,level(90)
+reg test_score hours_studied ,level(99)
 
 * Storing the values of the residuals and plotting them against hours studied. 
 predict U_hat, residuals
