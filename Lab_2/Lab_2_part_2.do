@@ -34,6 +34,8 @@ reg Times_Prospected relative_suitability `controls', cluster(cluster_id)
 * Specify the reduced form equation and estimate it
 reg vaccination_index relative_suitability `controls', cluster(cluster_id)
 
+* Set up a 2SLS to run the instrumental variable regression
+
 * Saving our new data and closing the logfile. 
 
 save OUTPUT_part2_data, replace
