@@ -28,6 +28,7 @@ local controls child_age_cont child_age_cont2 b4 hv007 hv025 elev LATNUM LONGNUM
 * Regressing vaccination index on times visit prospect and our control variables
 reg vaccination_index Times_Prospected `controls', cluster(cluster_id)
 
+* Specify the first stage equation and estimate it
 
 * Saving our new data and closing the logfile. 
 
