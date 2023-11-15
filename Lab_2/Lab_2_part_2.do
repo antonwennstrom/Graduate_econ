@@ -31,6 +31,9 @@ reg vaccination_index Times_Prospected `controls', cluster(cluster_id)
 * Specify the first stage equation and estimate it
 reg Times_Prospected relative_suitability `controls', cluster(cluster_id)
 
+* Specify the reduced form equation and estimate it
+reg vaccination_index relative_suitability `controls', cluster(cluster_id)
+
 * Saving our new data and closing the logfile. 
 
 save OUTPUT_part2_data, replace
