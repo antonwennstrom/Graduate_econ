@@ -29,6 +29,7 @@ local controls child_age_cont child_age_cont2 b4 hv007 hv025 elev LATNUM LONGNUM
 reg vaccination_index Times_Prospected `controls', cluster(cluster_id)
 
 * Specify the first stage equation and estimate it
+reg Times_Prospected relative_suitability `controls', cluster(cluster_id)
 
 * Saving our new data and closing the logfile. 
 
