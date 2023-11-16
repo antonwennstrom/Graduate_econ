@@ -7,10 +7,9 @@ LAB 2 - PART 1, Endogeneity
 
 
 Uses data: exam_results.dta
-Outputs: 
+Outputs: OUTPUT_part1_data
 		 
-Last edited: 2023-11-xx
-Packages needed: ??
+Last edited: 2023-11-16
 
 */
 
