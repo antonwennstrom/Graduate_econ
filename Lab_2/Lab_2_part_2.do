@@ -8,8 +8,7 @@ LAB 2 - PART 2 - Intrumental variables
 Uses data: 
 Outputs: 
 		 
-Last edited: 2023-11-xx
-Packages needed: ??
+Last edited: 2023-11-16
 
 */
 
