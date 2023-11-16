@@ -46,9 +46,8 @@ reg test_score hours_studied
 predict U_hat, residuals
 scatter U_hat hours_studied, yline(0)
 
-* Adapting the regression model by log-ing the dependent variable to accord for heteroscedasticity
-generate log_score = log(test_score)
-reg log_score hours_studied
+* Changing to a robust regression to deal with heteroscedasticity
+rreg log_score hours_studied
 predict Y_hat, residuals
 scatter Y_hat hours_studied, yline(0)
 
