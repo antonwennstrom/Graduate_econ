@@ -39,7 +39,7 @@ reg vaccination_index relative_suitability `controls', cluster(cluster_id)
 
 * Question 18)
 * Set up a 2SLS to run the instrumental variable regression
-ivregress 2sls vaccination_index `controls' (Times_Prospected = relative_suitability)
+ivregress 2sls vaccination_index `controls' (Times_Prospected = relative_suitability), cluster(cluster_id)
 
 * Saving our new data and closing the logfile. 
 
