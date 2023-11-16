@@ -31,7 +31,7 @@ reg vaccination_index Times_Prospected `controls', cluster(cluster_id)
 
 * Question 16)
 * Specify the first stage equation and estimate it
-reg Times_Prospected relative_suitability `controls', cluster(cluster_id)
+ivregress 2sls vaccination_index `controls' (Times_Prospected = relative_suitability), first cluster(cluster_id)
 
 * Question 17)
 * Specify the reduced form equation and estimate it
