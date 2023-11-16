@@ -1,9 +1,8 @@
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  /Users/hst17anwe/Documents/gradstata/Graduate_econ/Lab_2/logfile_la
-> b2.log
+       log:  /Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_2/logfile_lab2.log
   log type:  text
- opened on:  13 Nov 2023, 11:15:20
+ opened on:  16 Nov 2023, 11:43:53
 
 . 
 . * Reading the data
@@ -11,13 +10,12 @@
 
 . 
 . * Creating a macro for our control variables
-. local controls child_age_cont child_age_cont2 b4 hv007 hv025 elev LATNUM LONGN
-> UM mean_temp mean_rain land_suit malaria_ecology tsi_grid_tsi atlantic_all_yea
-> rs dist_missions
+. local controls child_age_cont child_age_cont2 b4 hv007 hv025 elev LATNUM LONGNUM mean_temp mean_rain land_suit malaria_ecology tsi_grid_t
+> si atlantic_all_years dist_missions
 
 . 
-. * Regressing vaccination index on times visit prospect and our control variabl
-> es
+. * Question 11)
+. * Regressing vaccination index on times visit prospect and our control variables
 . reg vaccination_index Times_Prospected `controls', cluster(cluster_id)
 
 Linear regression                               Number of obs     =     12,139
@@ -26,42 +24,143 @@ Linear regression                               Number of obs     =     12,139
                                                 R-squared         =     0.3605
                                                 Root MSE          =     .33225
 
-                            (Std. err. adjusted for 841 clusters in cluster_id)
--------------------------------------------------------------------------------
-              |               Robust
-vaccination~x | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
---------------+----------------------------------------------------------------
-Times_Prosp~d |  -.0683208   .0034923   -19.56   0.000    -.0751755   -.0614662
-child_age_c~t |   .0625961   .0167269     3.74   0.000     .0297647    .0954275
-child_age_c~2 |  -.0107277   .0071062    -1.51   0.132    -.0246757    .0032204
-           b4 |   .0141816   .0063068     2.25   0.025     .0018026    .0265606
-        hv007 |    .005346   .0026653     2.01   0.045     .0001146    .0105773
-        hv025 |  -.0243657   .0209925    -1.16   0.246    -.0655696    .0168382
-         elev |   .0001465   .0001077     1.36   0.174     -.000065     .000358
-       LATNUM |    -.04525     .00932    -4.86   0.000    -.0635432   -.0269568
-      LONGNUM |  -.0437315   .0128904    -3.39   0.001    -.0690328   -.0184303
-    mean_temp |  -.0245103   .0184866    -1.33   0.185    -.0607957    .0117752
-    mean_rain |  -.0013292   .0003471    -3.83   0.000    -.0020105   -.0006479
-    land_suit |  -.0419906   .0468017    -0.90   0.370    -.1338527    .0498714
-malaria_eco~y |   .0099298   .0030432     3.26   0.001     .0039566     .015903
- tsi_grid_tsi |  -.0906259   .0202455    -4.48   0.000    -.1303636   -.0508883
-atlantic_al~s |  -3.03e-06   4.07e-06    -0.74   0.457     -.000011    4.96e-06
-dist_missions |  -.0086846   .0154561    -0.56   0.574    -.0390217    .0216525
-        _cons |  -8.500813   5.335058    -1.59   0.111    -18.97242    1.970796
--------------------------------------------------------------------------------
+                                 (Std. err. adjusted for 841 clusters in cluster_id)
+------------------------------------------------------------------------------------
+                   |               Robust
+ vaccination_index | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------------+----------------------------------------------------------------
+  Times_Prospected |  -.0683208   .0034923   -19.56   0.000    -.0751755   -.0614662
+    child_age_cont |   .0625961   .0167269     3.74   0.000     .0297647    .0954275
+   child_age_cont2 |  -.0107277   .0071062    -1.51   0.132    -.0246757    .0032204
+                b4 |   .0141816   .0063068     2.25   0.025     .0018026    .0265606
+             hv007 |    .005346   .0026653     2.01   0.045     .0001146    .0105773
+             hv025 |  -.0243657   .0209925    -1.16   0.246    -.0655696    .0168382
+              elev |   .0001465   .0001077     1.36   0.174     -.000065     .000358
+            LATNUM |    -.04525     .00932    -4.86   0.000    -.0635432   -.0269568
+           LONGNUM |  -.0437315   .0128904    -3.39   0.001    -.0690328   -.0184303
+         mean_temp |  -.0245103   .0184866    -1.33   0.185    -.0607957    .0117752
+         mean_rain |  -.0013292   .0003471    -3.83   0.000    -.0020105   -.0006479
+         land_suit |  -.0419906   .0468017    -0.90   0.370    -.1338527    .0498714
+   malaria_ecology |   .0099298   .0030432     3.26   0.001     .0039566     .015903
+      tsi_grid_tsi |  -.0906259   .0202455    -4.48   0.000    -.1303636   -.0508883
+atlantic_all_years |  -3.03e-06   4.07e-06    -0.74   0.457     -.000011    4.96e-06
+     dist_missions |  -.0086846   .0154561    -0.56   0.574    -.0390217    .0216525
+             _cons |  -8.500813   5.335058    -1.59   0.111    -18.97242    1.970796
+------------------------------------------------------------------------------------
 
 . 
+. * Specify the first stage equation and estimate it
+. reg Times_Prospected relative_suitability `controls', cluster(cluster_id)
+
+Linear regression                               Number of obs     =     12,139
+                                                F(16, 840)        =      85.92
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.6525
+                                                Root MSE          =     2.5468
+
+                                   (Std. err. adjusted for 841 clusters in cluster_id)
+--------------------------------------------------------------------------------------
+                     |               Robust
+    Times_Prospected | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+---------------------+----------------------------------------------------------------
+relative_suitability |   .2529911   .1126485     2.25   0.025     .0318855    .4740966
+      child_age_cont |   .0960526    .117265     0.82   0.413    -.1341141    .3262193
+     child_age_cont2 |   -.008033   .0539637    -0.15   0.882    -.1139525    .0978864
+                  b4 |   .0673911   .0429245     1.57   0.117    -.0168607    .1516429
+               hv007 |   .0162747   .0271775     0.60   0.549    -.0370691    .0696184
+               hv025 |  -.9420201   .2456589    -3.83   0.000    -1.424197   -.4598428
+                elev |   .0009952   .0012705     0.78   0.434    -.0014984    .0034889
+              LATNUM |  -1.116868   .1012848   -11.03   0.000    -1.315669    -.918067
+             LONGNUM |  -.9436498    .109714    -8.60   0.000    -1.158996    -.728304
+           mean_temp |   .3851434    .202303     1.90   0.057    -.0119354    .7822222
+           mean_rain |  -.0177787   .0043939    -4.05   0.000     -.026403   -.0091544
+           land_suit |   -.539906   .4436074    -1.22   0.224    -1.410615    .3308032
+     malaria_ecology |    .093381   .0350009     2.67   0.008     .0246816    .1620804
+        tsi_grid_tsi |   -.378103   .1942896    -1.95   0.052    -.7594532    .0032471
+  atlantic_all_years |   .0000602   .0000355     1.69   0.091    -9.56e-06    .0001299
+       dist_missions |  -.5141306   .2016343    -2.55   0.011    -.9098968   -.1183644
+               _cons |  -16.49159   54.15252    -0.30   0.761    -122.7817    89.79855
+--------------------------------------------------------------------------------------
+
+. 
+. * Specify the reduced form equation and estimate it
+. reg vaccination_index relative_suitability `controls', cluster(cluster_id)
+
+Linear regression                               Number of obs     =     12,139
+                                                F(16, 840)        =      35.88
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.2304
+                                                Root MSE          =     .36447
+
+                                   (Std. err. adjusted for 841 clusters in cluster_id)
+--------------------------------------------------------------------------------------
+                     |               Robust
+   vaccination_index | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+---------------------+----------------------------------------------------------------
+relative_suitability |  -.0846409   .0085405    -9.91   0.000    -.1014041   -.0678777
+      child_age_cont |   .0604818   .0180793     3.35   0.001     .0249959    .0959677
+     child_age_cont2 |  -.0113404   .0080111    -1.42   0.157    -.0270644    .0043837
+                  b4 |   .0073432   .0067417     1.09   0.276    -.0058892    .0205757
+               hv007 |   .0045345   .0030088     1.51   0.132    -.0013712    .0104402
+               hv025 |  -.0026483   .0249136    -0.11   0.915    -.0515484    .0462519
+                elev |   .0000755   .0001284     0.59   0.557    -.0001765    .0003276
+              LATNUM |  -.0064818   .0104549    -0.62   0.535    -.0270026    .0140389
+             LONGNUM |   .0153374   .0138957     1.10   0.270    -.0119371    .0426119
+           mean_temp |  -.0480314   .0218986    -2.19   0.029    -.0910138    -.005049
+           mean_rain |   .0001751   .0004506     0.39   0.698    -.0007094    .0010595
+           land_suit |  -.0014417   .0487899    -0.03   0.976    -.0972061    .0943227
+     malaria_ecology |   .0066873   .0039524     1.69   0.091    -.0010705     .014445
+        tsi_grid_tsi |  -.0121404   .0209543    -0.58   0.562    -.0532693    .0289886
+  atlantic_all_years |  -6.68e-06   4.90e-06    -1.36   0.173    -.0000163    2.94e-06
+       dist_missions |   .0091214   .0197785     0.46   0.645    -.0296998    .0479425
+               _cons |  -7.683739   6.077272    -1.26   0.206    -19.61216    4.244684
+--------------------------------------------------------------------------------------
+
+. 
+. * Set up a 2SLS to run the instrumental variable regression
+. ivregress 2sls vaccination_index `controls' (Times_Prospected = relative_suitability)
+
+Instrumental variables 2SLS regression            Number of obs   =     12,139
+                                                  Wald chi2(16)   =     839.26
+                                                  Prob > chi2     =     0.0000
+                                                  R-squared       =          .
+                                                  Root MSE        =     .75798
+
+------------------------------------------------------------------------------------
+ vaccination_index | Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+-------------------+----------------------------------------------------------------
+  Times_Prospected |  -.3345608   .0254857   -13.13   0.000    -.3845117   -.2846098
+    child_age_cont |   .0926172   .0380601     2.43   0.015     .0180208    .1672136
+   child_age_cont2 |  -.0140279   .0166975    -0.84   0.401    -.0467545    .0186986
+                b4 |   .0298897   .0138497     2.16   0.031     .0027447    .0570346
+             hv007 |   .0099794   .0023042     4.33   0.000     .0054632    .0144955
+             hv025 |  -.3178112   .0320673    -9.91   0.000     -.380662   -.2549604
+              elev |   .0004085   .0000876     4.67   0.000     .0002369    .0005802
+            LATNUM |   -.380142   .0327023   -11.62   0.000    -.4442373   -.3160467
+           LONGNUM |  -.3003708   .0260154   -11.55   0.000      -.35136   -.2493816
+         mean_temp |   .0808225   .0178261     4.53   0.000     .0458839     .115761
+         mean_rain |   -.005773   .0005267   -10.96   0.000    -.0068053   -.0047407
+         land_suit |   -.182073   .0424835    -4.29   0.000    -.2653392   -.0988069
+   malaria_ecology |   .0379289   .0035907    10.56   0.000     .0308913    .0449665
+      tsi_grid_tsi |  -.1386388   .0165732    -8.37   0.000    -.1711217   -.1061559
+atlantic_all_years |   .0000135   3.57e-06     3.77   0.000     6.46e-06    .0000204
+     dist_missions |  -.1628866   .0188534    -8.64   0.000    -.1998386   -.1259345
+             _cons |  -13.20118   4.588655    -2.88   0.004    -22.19478   -4.207579
+------------------------------------------------------------------------------------
+Instrumented: Times_Prospected
+ Instruments: child_age_cont child_age_cont2 b4 hv007 hv025 elev LATNUM LONGNUM
+              mean_temp mean_rain land_suit malaria_ecology tsi_grid_tsi
+              atlantic_all_years dist_missions relative_suitability
+
 . 
 . * Saving our new data and closing the logfile. 
 . 
 . save OUTPUT_part2_data, replace
-(file OUTPUT_part2_data.dta not found)
 file OUTPUT_part2_data.dta saved
 
 . log close
       name:  <unnamed>
-       log:  /Users/hst17anwe/Documents/gradstata/Graduate_econ/Lab_2/logfile_la
-> b2.log
+       log:  /Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_2/logfile_lab2.log
   log type:  text
- closed on:  13 Nov 2023, 11:15:21
---------------------------------------------------------------------------------
+ closed on:  16 Nov 2023, 11:43:53
+-------------------------------------------------------------------------------------------------------------------------------------------

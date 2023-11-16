@@ -204,3 +204,57 @@ r(321);
 
 . 
 
+. help ivregress
+
+. do "/var/folders/p8/_291qn0x6dx0n5btskgnx9hc0000gp/T//SD43726.000000"
+
+. // Part II - Instrumental variables
+. 
+. /* 
+> 
+> LAB 2 - PART 2 - Intrumental variables 
+> 
+> 
+> Uses data: 
+> Outputs: 
+>                  
+> Last edited: 2023-11-xx
+> Packages needed: ??
+> 
+> */
+. 
+. set more off
+
+. cd "/Users/hst17anwe/Documents/gradstata/Graduate_econ/Lab_2"
+unable to change to /Users/hst17anwe/Documents/gradstata/Graduate_econ/Lab_2
+r(170);
+
+end of do-file
+
+r(170);
+
+. do "/var/folders/p8/_291qn0x6dx0n5btskgnx9hc0000gp/T//SD43726.000000"
+
+. // Part II - Instrumental variables
+. 
+. /* 
+> 
+> LAB 2 - PART 2 - Intrumental variables 
+> 
+> 
+> Uses data: 
+> Outputs: 
+>                  
+> Last edited: 2023-11-xx
+> Packages needed: ??
+> 
+> */
+. 
+. set more off
+
+. cd "/Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_2"
+/Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_2
+
+. clear all
+
+. capture log close
