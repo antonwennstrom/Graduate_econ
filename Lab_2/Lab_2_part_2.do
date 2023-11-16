@@ -5,8 +5,8 @@
 LAB 2 - PART 2 - Intrumental variables 
 
 
-Uses data: 
-Outputs: 
+Uses data: use colonial_legacy.dta
+Outputs: OUTPUT_part2_data
 		 
 Last edited: 2023-11-16
 
@@ -43,5 +43,4 @@ ivregress 2sls vaccination_index `controls' (Times_Prospected = relative_suitabi
 * Saving our new data and closing the logfile. 
 
 save OUTPUT_part2_data, replace
-log close
 log close
