@@ -2,14 +2,13 @@
       name:  <unnamed>
        log:  /Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_2/logfile_lab1.log
   log type:  text
- opened on:  16 Nov 2023, 11:04:54
+ opened on:  16 Nov 2023, 20:07:48
+
+. use exam_results.dta
 
 . 
 . * Question 1)
 . * Reading the data and producing some summary statistics.
-. use exam_results.dta
-
-. 
 . summarize
 
     Variable |        Obs        Mean    Std. dev.       Min        Max
@@ -38,7 +37,6 @@ distinction   500      2    .118    0    1
 fail          500      2    .168    0    1  
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-. * Add some more statistics
 . 
 . * Question 2)
 . * Plotting test score against hours studied and calculating correlation. 
@@ -111,28 +109,47 @@ hours_studied |  -.3575643   .1420083    -2.52   0.012    -.7247606    .0096319
 . 
 . *Question 5)
 . * Storing the values of the residuals and plotting them against hours studied. 
+. reg test_score hours_studied
+
+      Source |       SS           df       MS      Number of obs   =       500
+-------------+----------------------------------   F(1, 498)       =      6.34
+       Model |  683.623654         1  683.623654   Prob > F        =    0.0121
+    Residual |  53698.9263       498  107.829169   R-squared       =    0.0126
+-------------+----------------------------------   Adj R-squared   =    0.0106
+       Total |    54382.55       499  108.983066   Root MSE        =    10.384
+
+-------------------------------------------------------------------------------
+   test_score | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+hours_studied |  -.3575643   .1420083    -2.52   0.012    -.6365736   -.0785551
+        _cons |   75.47402   6.903892    10.93   0.000     61.90967    89.03836
+-------------------------------------------------------------------------------
+
 . predict U_hat, residuals
 
 . scatter U_hat hours_studied, yline(0)
 
 . 
-. * Adapting the regression model by log-ing the dependent variable to accord for heteroscedasticity
-. generate log_score = log(test_score)
+. * Changing to a robust regression to deal with heteroscedasticity
+. rreg test_score hours_studied
 
-. reg log_score hours_studied
+   Huber iteration 1:  maximum difference in weights = .63886013
+   Huber iteration 2:  maximum difference in weights = .14326249
+   Huber iteration 3:  maximum difference in weights = .04742773
+Biweight iteration 4:  maximum difference in weights = .25644919
+Biweight iteration 5:  maximum difference in weights = .01949724
+Biweight iteration 6:  maximum difference in weights = .01405616
+Biweight iteration 7:  maximum difference in weights = .0097372
 
-      Source |       SS           df       MS      Number of obs   =       500
--------------+----------------------------------   F(1, 498)       =      3.93
-       Model |  .115900808         1  .115900808   Prob > F        =    0.0480
-    Residual |  14.6929991       498  .029504014   R-squared       =    0.0078
--------------+----------------------------------   Adj R-squared   =    0.0058
-       Total |  14.8088999       499  .029677154   Root MSE        =    .17177
+Robust regression                               Number of obs     =        500
+                                                F(  1,       498) =       0.87
+                                                Prob > F          =     0.3524
 
 -------------------------------------------------------------------------------
-    log_score | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+   test_score | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
 --------------+----------------------------------------------------------------
-hours_studied |  -.0046557    .002349    -1.98   0.048    -.0092709   -.0000405
-        _cons |    4.27335   .1142001    37.42   0.000     4.048977    4.497723
+hours_studied |  -.1223525   .1314496    -0.93   0.352    -.3806166    .1359116
+        _cons |   62.47163   6.390567     9.78   0.000     49.91583    75.02742
 -------------------------------------------------------------------------------
 
 . predict Y_hat, residuals
@@ -194,67 +211,15 @@ most_lectures_dummy |   3.853512   .9809197     3.93   0.000     1.926251    5.7
 -------------------------------------------------------------------------------------
 
 . 
-. estat endog test_score hours_studied most_lectures
-estat endog not valid
-r(321);
-
-end of do-file
-
-r(321);
-
+. //estat endog test_score hours_studied most_lectures
 . 
+. * Saving our new data and closing the logfile. 
+. save OUTPUT_part1_data, replace
+file OUTPUT_part1_data.dta saved
 
-. help ivregress
-
-. do "/var/folders/p8/_291qn0x6dx0n5btskgnx9hc0000gp/T//SD43726.000000"
-
-. // Part II - Instrumental variables
-. 
-. /* 
-> 
-> LAB 2 - PART 2 - Intrumental variables 
-> 
-> 
-> Uses data: 
-> Outputs: 
->                  
-> Last edited: 2023-11-xx
-> Packages needed: ??
-> 
-> */
-. 
-. set more off
-
-. cd "/Users/hst17anwe/Documents/gradstata/Graduate_econ/Lab_2"
-unable to change to /Users/hst17anwe/Documents/gradstata/Graduate_econ/Lab_2
-r(170);
-
-end of do-file
-
-r(170);
-
-. do "/var/folders/p8/_291qn0x6dx0n5btskgnx9hc0000gp/T//SD43726.000000"
-
-. // Part II - Instrumental variables
-. 
-. /* 
-> 
-> LAB 2 - PART 2 - Intrumental variables 
-> 
-> 
-> Uses data: 
-> Outputs: 
->                  
-> Last edited: 2023-11-xx
-> Packages needed: ??
-> 
-> */
-. 
-. set more off
-
-. cd "/Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_2"
-/Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_2
-
-. clear all
-
-. capture log close
+. log close
+      name:  <unnamed>
+       log:  /Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_2/logfile_lab1.log
+  log type:  text
+ closed on:  16 Nov 2023, 20:07:53
+-------------------------------------------------------------------------------------------------------------------------------------------
