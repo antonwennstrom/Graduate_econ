@@ -47,7 +47,7 @@ predict U_hat, residuals
 scatter U_hat hours_studied, yline(0)
 
 * Changing to a robust regression to deal with heteroscedasticity
-rreg log_score hours_studied
+rreg test_score hours_studied
 predict Y_hat, residuals
 scatter Y_hat hours_studied, yline(0)
 
