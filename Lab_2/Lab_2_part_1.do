@@ -26,7 +26,6 @@ use exam_results.dta
 
 summarize
 codebook, compact
-* Add some more statistics
 
 * Question 2)
 * Plotting test score against hours studied and calculating correlation. 
