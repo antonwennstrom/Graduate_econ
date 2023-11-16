@@ -20,7 +20,7 @@ clear all
 capture log close
 log using logfile_lab1.log, replace
 
-
+* Question 1)
 * Reading the data and producing some summary statistics.
 use exam_results.dta
 
@@ -28,7 +28,7 @@ describe
 summarize
 * Add some more statistics
 
-
+* Question 2)
 * Plotting test score against hours studied and calculating correlation. 
 scatter test_score hours_studied
 correlate test_score hours_studied

@@ -1,36 +1,15 @@
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  /Users/hst17anwe/Documents/gradstata/Graduate_econ/Lab_2/logfile_la
-> b1.log
+       log:  /Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_2/logfile_lab1.log
   log type:  text
- opened on:  13 Nov 2023, 11:15:23
+ opened on:  16 Nov 2023, 11:04:54
 
 . 
-. 
+. * Question 1)
 . * Reading the data and producing some summary statistics.
 . use exam_results.dta
 
 . 
-. describe
-
-Contains data from exam_results.dta
- Observations:           500                  
-    Variables:             8                  10 Nov 2023 17:53
---------------------------------------------------------------------------------
-Variable      Storage   Display    Value
-    name         type    format    label      Variable label
---------------------------------------------------------------------------------
-name            str19   %19s                  
-age             float   %9.0g                 
-test_score      float   %9.0g                 
-hours_studied   float   %9.0g                 
-most_lectures   str3    %9s                   
-pass            float   %9.0g                 
-distinction     float   %9.0g                 
-fail            float   %9.0g                 
---------------------------------------------------------------------------------
-Sorted by: 
-
 . summarize
 
     Variable |        Obs        Mean    Std. dev.       Min        Max
@@ -45,9 +24,23 @@ most_lectu~s |          0
  distinction |        500        .118    .3229312          0          1
         fail |        500        .168    .3742407          0          1
 
+. codebook, compact
+
+Variable      Obs Unique    Mean  Min  Max  Label
+-------------------------------------------------------------------------------------------------------------------------------------------
+name          500    500       .    .    .  
+age           500     26  24.436   17   56  
+test_score    500     52   58.13   36   89  
+hours_stud~d  500     19  48.506   38   56  
+most_lectu~s  500      2       .    .    .  
+pass          500      2    .714    0    1  
+distinction   500      2    .118    0    1  
+fail          500      2    .168    0    1  
+-------------------------------------------------------------------------------------------------------------------------------------------
+
 . * Add some more statistics
 . 
-. 
+. * Question 2)
 . * Plotting test score against hours studied and calculating correlation. 
 . scatter test_score hours_studied
 
@@ -61,6 +54,8 @@ hours_stud~d |  -0.1121   1.0000
 
 
 . 
+. * Question 3)
+. * Estimating an OLS regression with test score as dependent variable and hours studied as independent variable
 . reg test_score hours_studied
 
       Source |       SS           df       MS      Number of obs   =       500
@@ -78,23 +73,102 @@ hours_studied |  -.3575643   .1420083    -2.52   0.012    -.6365736   -.0785551
 -------------------------------------------------------------------------------
 
 . 
-. * Testing our null hypotheses. 
+. * Question 4)
+. * Testing our null hypotheses at 10% and 1% significance level respectively. For significance level 5%, please refer to the regression in
+>  question 3
+. reg test_score hours_studied ,level(90)
+
+      Source |       SS           df       MS      Number of obs   =       500
+-------------+----------------------------------   F(1, 498)       =      6.34
+       Model |  683.623654         1  683.623654   Prob > F        =    0.0121
+    Residual |  53698.9263       498  107.829169   R-squared       =    0.0126
+-------------+----------------------------------   Adj R-squared   =    0.0106
+       Total |    54382.55       499  108.983066   Root MSE        =    10.384
+
+-------------------------------------------------------------------------------
+   test_score | Coefficient  Std. err.      t    P>|t|     [90% conf. interval]
+--------------+----------------------------------------------------------------
+hours_studied |  -.3575643   .1420083    -2.52   0.012    -.5915825   -.1235461
+        _cons |   75.47402   6.903892    10.93   0.000     64.09696    86.85107
+-------------------------------------------------------------------------------
+
+. reg test_score hours_studied ,level(99)
+
+      Source |       SS           df       MS      Number of obs   =       500
+-------------+----------------------------------   F(1, 498)       =      6.34
+       Model |  683.623654         1  683.623654   Prob > F        =    0.0121
+    Residual |  53698.9263       498  107.829169   R-squared       =    0.0126
+-------------+----------------------------------   Adj R-squared   =    0.0106
+       Total |    54382.55       499  108.983066   Root MSE        =    10.384
+
+-------------------------------------------------------------------------------
+   test_score | Coefficient  Std. err.      t    P>|t|     [99% conf. interval]
+--------------+----------------------------------------------------------------
+hours_studied |  -.3575643   .1420083    -2.52   0.012    -.7247606    .0096319
+        _cons |   75.47402   6.903892    10.93   0.000     57.62236    93.32567
+-------------------------------------------------------------------------------
+
 . 
-. 
-. * Storing the values of the residuals and plotting them against hours studied.
->  
+. *Question 5)
+. * Storing the values of the residuals and plotting them against hours studied. 
 . predict U_hat, residuals
 
-. scatter U_hat hours_studied /* Assumed that he meant hours_studied instead of 
-> educ. */
+. scatter U_hat hours_studied, yline(0)
 
 . 
-. * Creating categorical variable and re-running the regression with this new va
-> riable. 
+. * Adapting the regression model by log-ing the dependent variable to accord for heteroscedasticity
+. generate log_score = log(test_score)
+
+. reg log_score hours_studied
+
+      Source |       SS           df       MS      Number of obs   =       500
+-------------+----------------------------------   F(1, 498)       =      3.93
+       Model |  .115900808         1  .115900808   Prob > F        =    0.0480
+    Residual |  14.6929991       498  .029504014   R-squared       =    0.0078
+-------------+----------------------------------   Adj R-squared   =    0.0058
+       Total |  14.8088999       499  .029677154   Root MSE        =    .17177
+
+-------------------------------------------------------------------------------
+    log_score | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+--------------+----------------------------------------------------------------
+hours_studied |  -.0046557    .002349    -1.98   0.048    -.0092709   -.0000405
+        _cons |    4.27335   .1142001    37.42   0.000     4.048977    4.497723
+-------------------------------------------------------------------------------
+
+. predict Y_hat, residuals
+
+. scatter Y_hat hours_studied, yline(0)
+
 . 
-. * Creating a dummy variable for "most_lectures" and then regressing test score
->  on hours study and this new dummy variable. 
+. * Question 6)
+. * Creating categorical variable and re-running the regression with this new variable. 
+. recode hours_studied (38/43 = 0 "little studying") (44/50 = 1 "normal studying") (51/56 = 2 "heavy studying"), generate(hours_studied_cat
+> )
+(500 differences between hours_studied and hours_studied_cat)
+
 . 
+. reg test_score i.hours_studied_cat
+
+      Source |       SS           df       MS      Number of obs   =       500
+-------------+----------------------------------   F(2, 497)       =      2.01
+       Model |  435.948872         2  217.974436   Prob > F        =    0.1353
+    Residual |  53946.6011       497  108.544469   R-squared       =    0.0080
+-------------+----------------------------------   Adj R-squared   =    0.0040
+       Total |    54382.55       499  108.983066   Root MSE        =    10.418
+
+-----------------------------------------------------------------------------------
+       test_score | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+------------------+----------------------------------------------------------------
+hours_studied_cat |
+ normal studying  |  -3.139826   1.900346    -1.65   0.099    -6.873529    .5938776
+  heavy studying  |  -4.064569   2.030809    -2.00   0.046    -8.054597   -.0745403
+                  |
+            _cons |   61.30303   1.813622    33.80   0.000     57.73972    64.86634
+-----------------------------------------------------------------------------------
+
+. 
+. * Question 8)
+. * Creating a dummy variable for "most_lectures" and then regressing test score on hours study and this new dummy variable. 
 . generate most_lectures_dummy = 1 if most_lectures == "Yes"
 (272 missing values generated)
 
@@ -111,26 +185,20 @@ hours_studied |  -.3575643   .1420083    -2.52   0.012    -.6365736   -.0785551
 -------------+----------------------------------   Adj R-squared   =    0.0385
        Total |    54382.55       499  108.983066   Root MSE        =    10.237
 
--------------------------------------------------------------------------------
-   test_score | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
---------------+----------------------------------------------------------------
-hours_studied |  -.1526234   .1493984    -1.02   0.307    -.4461537    .1409069
-most_lectur~y |   3.853512   .9809197     3.93   0.000     1.926251    5.780773
-        _cons |   63.77595   7.428886     8.58   0.000     49.18005    78.37184
--------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+         test_score | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+--------------------+----------------------------------------------------------------
+      hours_studied |  -.1526234   .1493984    -1.02   0.307    -.4461537    .1409069
+most_lectures_dummy |   3.853512   .9809197     3.93   0.000     1.926251    5.780773
+              _cons |   63.77595   7.428886     8.58   0.000     49.18005    78.37184
+-------------------------------------------------------------------------------------
 
 . 
-. 
-. * Saving our new data and closing the logfile. 
-. 
-. 
-. save OUTPUT_part1_data, replace
-file OUTPUT_part1_data.dta saved
+. estat endog test_score hours_studied most_lectures
+estat endog not valid
+r(321);
 
-. log close
-      name:  <unnamed>
-       log:  /Users/hst17anwe/Documents/gradstata/Graduate_econ/Lab_2/logfile_la
-> b1.log
-  log type:  text
- closed on:  13 Nov 2023, 11:15:26
---------------------------------------------------------------------------------
+end of do-file
+
+r(321);
+
