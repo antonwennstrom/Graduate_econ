@@ -19,11 +19,10 @@ cd "/Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_2"
 clear all
 capture log close
 log using logfile_lab1.log, replace
+use exam_results.dta
 
 * Question 1)
 * Reading the data and producing some summary statistics.
-use exam_results.dta
-
 summarize
 codebook, compact
 
