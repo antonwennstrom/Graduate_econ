@@ -27,21 +27,22 @@ local controls child_age_cont child_age_cont2 b4 hv007 hv025 elev LATNUM LONGNUM
 
 * Question 11)
 * Regressing vaccination index on times visit prospect and our control variables
-reg vaccination_index Times_Prospected `controls', cluster(cluster_id)
+reg vaccination_index Times_Prospected `controls', robust cluster(cluster_id)
 
 * Question 16)
 * Specify the first stage equation and estimate it
-ivregress 2sls vaccination_index `controls' (Times_Prospected = relative_suitability), first cluster(cluster_id)
+ivregress 2sls vaccination_index `controls' (Times_Prospected = relative_suitability), robust first cluster(cluster_id)
 
 * Question 17)
 * Specify the reduced form equation and estimate it
-reg vaccination_index relative_suitability `controls', cluster(cluster_id)
+reg vaccination_index relative_suitability `controls', robust cluster(cluster_id)
 
 * Question 18)
 * Set up a 2SLS to run the instrumental variable regression
-ivregress 2sls vaccination_index `controls' (Times_Prospected = relative_suitability), cluster(cluster_id)
+ivregress 2sls vaccination_index `controls' (Times_Prospected = relative_suitability), robust cluster(cluster_id)
 
 * Saving our new data and closing the logfile. 
 
 save OUTPUT_part2_data, replace
+log close
 log close
