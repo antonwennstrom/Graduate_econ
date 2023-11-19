@@ -14,7 +14,7 @@ Last edited: 2023-11-xx
 */
 
 set more off
-cd "/Users/emil/Documents/Stata/Lab 3/logfile_lab3.log"
+cd "/Users/emil/Documents/Stata/Lab 3/"
 clear all
 capture log close
 log using logfile_lab3.log, replace
