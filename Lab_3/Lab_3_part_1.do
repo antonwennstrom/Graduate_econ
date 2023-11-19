@@ -19,3 +19,10 @@ clear all
 capture log close
 log using logfile_lab3.log, replace
 use RDD_data_MLDA_deaths.dta
+
+
+
+
+* Saving our new data and closing the logfile. 
+save OUTPUT_part1_data, replace
+log close
