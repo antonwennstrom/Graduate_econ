@@ -14,13 +14,21 @@ Last edited: 2023-11-xx
 */
 
 set more off
-cd "/Users/emil/Documents/Stata/Lab 3"
+cd "/Users/hst17anwe/Documents/nylabbar/Graduate_econ/Lab_3/"
 clear all
 capture log close
 log using logfile_lab3.log, replace
 use RDD_data_MLDA_deaths.dta
 
+summarize
 
+
+
+* Recentering our running variable by subtracting 21.
+
+gen recentered_age = agecell - 21
+
+scatter recentered_age all
 
 
 * Saving our new data and closing the logfile. 
