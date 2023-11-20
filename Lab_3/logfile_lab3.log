@@ -3,7 +3,7 @@
        log:  /Users/hst17anwe/Documents/nylabbar/Graduate_econ/Lab_3/logfile_lab
 > 3.log
   log type:  text
- opened on:  20 Nov 2023, 13:01:59
+ opened on:  20 Nov 2023, 13:14:08
 
 . use RDD_data_MLDA_deaths.dta
 
@@ -32,48 +32,49 @@ age_in_years |         50        20.5    1.111168         19         22
 . 
 . * Generating a dummy variable (treatment) that takes the value of 1 if the per
 > son is permitted to drink.
-. 
 . gen treatment = 1 if recentered_age >= 0
 (25 missing values generated)
+
+. replace treatment = 0 if missing(treatment)
+(25 real changes made)
 
 . 
 . * Regressing treatment on external causes of death, and then on internal cause
 > s of death.
-. 
 . reg internal treatment
-note: treatment omitted because of collinearity.
 
-      Source |       SS           df       MS      Number of obs   =        24
--------------+----------------------------------   F(0, 23)        =      0.00
-       Model |           0         0           .   Prob > F        =         .
-    Residual |  46.2482094        23  2.01079171   R-squared       =    0.0000
--------------+----------------------------------   Adj R-squared   =    0.0000
-       Total |  46.2482094        23  2.01079171   Root MSE        =     1.418
+      Source |       SS           df       MS      Number of obs   =        48
+-------------+----------------------------------   F(1, 46)        =     79.25
+       Model |  151.077956         1  151.077956   Prob > F        =    0.0000
+    Residual |  87.6865922        46  1.90623027   R-squared       =    0.6327
+-------------+----------------------------------   Adj R-squared   =    0.6248
+       Total |  238.764548        47  5.08009676   Root MSE        =    1.3807
 
 ------------------------------------------------------------------------------
     internal | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
 -------------+----------------------------------------------------------------
-   treatment |          0  (omitted)
-       _cons |    22.0594   .2894529    76.21   0.000     21.46062    22.65818
+   treatment |   3.548215   .3985631     8.90   0.000     2.745949    4.350481
+       _cons |   18.51118   .2818267    65.68   0.000      17.9439    19.07847
 ------------------------------------------------------------------------------
 
 . reg external treatment
-note: treatment omitted because of collinearity.
 
-      Source |       SS           df       MS      Number of obs   =        24
--------------+----------------------------------   F(0, 23)        =      0.00
-       Model |           0         0           .   Prob > F        =         .
-    Residual |  251.403178        23   10.930573   R-squared       =    0.0000
--------------+----------------------------------   Adj R-squared   =    0.0000
-       Total |  251.403178        23   10.930573   Root MSE        =    3.3061
+      Source |       SS           df       MS      Number of obs   =        48
+-------------+----------------------------------   F(1, 46)        =      7.34
+       Model |  57.6493915         1  57.6493915   Prob > F        =    0.0095
+    Residual |  361.413977        46  7.85682559   R-squared       =    0.1376
+-------------+----------------------------------   Adj R-squared   =    0.1188
+       Total |  419.063369        47  8.91624189   Root MSE        =     2.803
 
 ------------------------------------------------------------------------------
     external | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
 -------------+----------------------------------------------------------------
-   treatment |          0  (omitted)
-       _cons |   76.48335   .6748633   113.33   0.000     75.08729    77.87941
+   treatment |   2.191829   .8091573     2.71   0.009     .5630803    3.820578
+       _cons |   74.29152   .5721606   129.84   0.000     73.13982    75.44322
 ------------------------------------------------------------------------------
 
+. 
+. 
 . 
 . 
 . * Saving our new data and closing the logfile. 
@@ -85,5 +86,5 @@ file OUTPUT_part1_data.dta saved
        log:  /Users/hst17anwe/Documents/nylabbar/Graduate_econ/Lab_3/logfile_lab
 > 3.log
   log type:  text
- closed on:  20 Nov 2023, 13:02:02
+ closed on:  20 Nov 2023, 13:14:10
 --------------------------------------------------------------------------------
