@@ -36,11 +36,12 @@ gen treatment = 1 if recentered_age >= 0
 replace treatment = 0 if missing(treatment)
 
 * Regressing treatment on external causes of death, and then on internal causes of death.
-reg internal treatment
 reg external treatment
+reg internal treatment
 
-
-
+* Performing the same regressions as above but with reduced bandwidth.
+reg external treatment if recentered_age > -1 & recentered_age < 1
+reg internal treatment if recentered_age > -1 & recentered_age < 1
 
 * Saving our new data and closing the logfile. 
 save OUTPUT_part1_data, replace
