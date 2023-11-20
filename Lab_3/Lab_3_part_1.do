@@ -22,6 +22,7 @@ use RDD_data_MLDA_deaths.dta
 
 summarize
 
+line all external internal agecell, legend(size(medsmall))
 
 
 * Recentering our running variable by subtracting 21.

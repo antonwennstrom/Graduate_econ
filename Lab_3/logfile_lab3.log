@@ -3,7 +3,7 @@
        log:  /Users/hst17anwe/Documents/nylabbar/Graduate_econ/Lab_3/logfile_lab
 > 3.log
   log type:  text
- opened on:  20 Nov 2023, 13:33:02
+ opened on:  20 Nov 2023, 14:04:33
 
 . use RDD_data_MLDA_deaths.dta
 
@@ -19,6 +19,9 @@ age_in_years |         50        20.5    1.111168         19         22
     external |         48    75.38743    2.986008   71.34142   83.33099
 
 . 
+. 
+. line all external internal agecell, legend(size(medsmall))
+
 . 
 . 
 . * Recentering our running variable by subtracting 21.
@@ -117,5 +120,5 @@ file OUTPUT_part1_data.dta saved
        log:  /Users/hst17anwe/Documents/nylabbar/Graduate_econ/Lab_3/logfile_lab
 > 3.log
   log type:  text
- closed on:  20 Nov 2023, 13:33:03
+ closed on:  20 Nov 2023, 14:04:37
 --------------------------------------------------------------------------------
