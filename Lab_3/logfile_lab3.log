@@ -3,12 +3,77 @@
        log:  /Users/hst17anwe/Documents/nylabbar/Graduate_econ/Lab_3/logfile_lab
 > 3.log
   log type:  text
- opened on:  20 Nov 2023, 11:15:53
+ opened on:  20 Nov 2023, 13:01:59
 
 . use RDD_data_MLDA_deaths.dta
 
 . 
+. summarize
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+age_in_years |         50        20.5    1.111168         19         22
+     agecell |         50          21    1.126957   19.06849   22.93151
+         all |         48    95.67272    3.831062   88.42776   105.2683
+    internal |         48    20.28529    2.253907   15.97709   24.37291
+    external |         48    75.38743    2.986008   71.34142   83.33099
+
 . 
+. 
+. 
+. * Recentering our running variable by subtracting 21.
+. 
+. gen recentered_age = agecell - 21
+
+. 
+. scatter recentered_age all
+
+. 
+. 
+. * Generating a dummy variable (treatment) that takes the value of 1 if the per
+> son is permitted to drink.
+. 
+. gen treatment = 1 if recentered_age >= 0
+(25 missing values generated)
+
+. 
+. * Regressing treatment on external causes of death, and then on internal cause
+> s of death.
+. 
+. reg internal treatment
+note: treatment omitted because of collinearity.
+
+      Source |       SS           df       MS      Number of obs   =        24
+-------------+----------------------------------   F(0, 23)        =      0.00
+       Model |           0         0           .   Prob > F        =         .
+    Residual |  46.2482094        23  2.01079171   R-squared       =    0.0000
+-------------+----------------------------------   Adj R-squared   =    0.0000
+       Total |  46.2482094        23  2.01079171   Root MSE        =     1.418
+
+------------------------------------------------------------------------------
+    internal | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   treatment |          0  (omitted)
+       _cons |    22.0594   .2894529    76.21   0.000     21.46062    22.65818
+------------------------------------------------------------------------------
+
+. reg external treatment
+note: treatment omitted because of collinearity.
+
+      Source |       SS           df       MS      Number of obs   =        24
+-------------+----------------------------------   F(0, 23)        =      0.00
+       Model |           0         0           .   Prob > F        =         .
+    Residual |  251.403178        23   10.930573   R-squared       =    0.0000
+-------------+----------------------------------   Adj R-squared   =    0.0000
+       Total |  251.403178        23   10.930573   Root MSE        =    3.3061
+
+------------------------------------------------------------------------------
+    external | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   treatment |          0  (omitted)
+       _cons |   76.48335   .6748633   113.33   0.000     75.08729    77.87941
+------------------------------------------------------------------------------
+
 . 
 . 
 . * Saving our new data and closing the logfile. 
@@ -20,5 +85,5 @@ file OUTPUT_part1_data.dta saved
        log:  /Users/hst17anwe/Documents/nylabbar/Graduate_econ/Lab_3/logfile_lab
 > 3.log
   log type:  text
- closed on:  20 Nov 2023, 11:15:53
+ closed on:  20 Nov 2023, 13:02:02
 --------------------------------------------------------------------------------
