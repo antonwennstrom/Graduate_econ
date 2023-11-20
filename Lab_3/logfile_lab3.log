@@ -1,0 +1,24 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/hst17anwe/Documents/nylabbar/Graduate_econ/Lab_3/logfile_lab
+> 3.log
+  log type:  text
+ opened on:  20 Nov 2023, 11:15:53
+
+. use RDD_data_MLDA_deaths.dta
+
+. 
+. 
+. 
+. 
+. * Saving our new data and closing the logfile. 
+. save OUTPUT_part1_data, replace
+file OUTPUT_part1_data.dta saved
+
+. log close
+      name:  <unnamed>
+       log:  /Users/hst17anwe/Documents/nylabbar/Graduate_econ/Lab_3/logfile_lab
+> 3.log
+  log type:  text
+ closed on:  20 Nov 2023, 11:15:53
+--------------------------------------------------------------------------------
