@@ -20,7 +20,15 @@ capture log close
 log using logfile_lab3.log, replace
 use DID_deaths.dta
 
-/*
+
+/* Question 15 (Förslag på graphical solution)
+gen alabama = mrate if state_name == "Alabama"
+gen arkansas = mrate if state_name == "Arkansas"
+
+scatter arkansas alabama year
+*/
+
+/* Question 16 Förslag på lösning
 gen year_dummy = 1 if year >= 1975
 replace year_dummy = 0 if missing(year_dummy)
 gen state_dummy = 1 if state_name == "Alabama"
@@ -30,6 +38,7 @@ gen did = state_dummy * year_dummy
 
 reg mrate year_dummy state_dummy did
 */
+
 
 
 * Saving our new data and closing the logfile. 
