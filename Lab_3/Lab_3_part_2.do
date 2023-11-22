@@ -5,6 +5,7 @@
 
 LAB 3 - PART 2, Difference-in-Difference
 
+Inputs: filepath (current directory)
 
 Uses data: DID_deaths.dta
 Outputs: OUTPUT_part2_data
@@ -14,7 +15,7 @@ Last edited: 2023-11-22
 */
 
 set more off
-cd "/Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_3"
+cd "INSERT FILEPATH"
 clear all
 capture log close
 log using logfile_lab3.log, replace
