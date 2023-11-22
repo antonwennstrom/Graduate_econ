@@ -1,8 +1,8 @@
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  /Users/hst17anwe/Documents/abc/Graduate_econ/Lab_3/logfile_lab3.log
+       log:  /Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_3/logfile_lab3.log
   log type:  text
- opened on:  22 Nov 2023, 12:21:26
+ opened on:  22 Nov 2023, 19:43:57
 
 . use DID_deaths.dta
 
@@ -22,9 +22,8 @@
 (18 missing values generated)
 
 . 
-. twoway (scatter arkansas alabama year) (line arkansas year, lpattern(dash)) (l
-> ine alabama year, lpattern(dash)), ytitle("Mortality rate") xtitle("Year") leg
-> end(order(1 "Arkansas" 2 "Alabama"))
+. twoway (scatter arkansas alabama year) (line arkansas year, lpattern(dash)) (line alabama year, lpattern(dash)), xline(1975) ytitle("Mort
+> ality rate") xtitle("Year") legend(order(1 "Arkansas" 2 "Alabama"))
 
 . 
 . * Question 16 Förslag på lösning
@@ -64,10 +63,8 @@
 . 
 . 
 . 
-. graph twoway (function y = -2*x + 40, range(-1 0)) || (function y = -3*x + 27,
->  range(-1 0)) || (function y = -1*x + 40, range(0 1)) || (function y = -8*x + 
-> 27, range(0 1)) , xline(0)
-
+. //graph twoway (function y = -2*x + 40, range(-1 0)) || (function y = -3*x + 27, range(-1 0)) || (function y = -1*x + 40, range(0 1)) || 
+> (function y = -8*x + 27, range(0 1)) , xline(0)
 . 
 . 
 . 
@@ -77,7 +74,7 @@ file OUTPUT_part2_data.dta saved
 
 . log close
       name:  <unnamed>
-       log:  /Users/hst17anwe/Documents/abc/Graduate_econ/Lab_3/logfile_lab3.log
+       log:  /Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_3/logfile_lab3.log
   log type:  text
- closed on:  22 Nov 2023, 12:21:30
---------------------------------------------------------------------------------
+ closed on:  22 Nov 2023, 19:43:59
+-------------------------------------------------------------------------------------------------------------------------------------------

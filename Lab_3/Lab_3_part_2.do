@@ -14,7 +14,7 @@ Last edited: 2023-11-xx
 */
 
 set more off
-cd "/Users/hst17anwe/Documents/abc/Graduate_econ/Lab_3"
+cd "/Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_3"
 clear all
 capture log close
 log using logfile_lab3.log, replace
@@ -27,7 +27,7 @@ replace legal = 0 if missing(legal)
 gen alabama = mrate if state_name == "Alabama"
 gen arkansas = mrate if state_name == "Arkansas"
 
-twoway (scatter arkansas alabama year) (line arkansas year, lpattern(dash)) (line alabama year, lpattern(dash)), ytitle("Mortality rate") xtitle("Year") legend(order(1 "Arkansas" 2 "Alabama"))
+twoway (scatter arkansas alabama year) (line arkansas year, lpattern(dash)) (line alabama year, lpattern(dash)), xline(1975) ytitle("Mortality rate") xtitle("Year") legend(order(1 "Arkansas" 2 "Alabama"))
 
 * Question 16 Förslag på lösning
 gen year_dummy = 1 if year >= 1975
@@ -40,7 +40,7 @@ reg mrate year_dummy state_dummy did
 
 
 
-graph twoway (function y = -2*x + 40, range(-1 0)) || (function y = -3*x + 27, range(-1 0)) || (function y = -1*x + 40, range(0 1)) || (function y = -8*x + 27, range(0 1)) , xline(0)
+//graph twoway (function y = -2*x + 40, range(-1 0)) || (function y = -3*x + 27, range(-1 0)) || (function y = -1*x + 40, range(0 1)) || (function y = -8*x + 27, range(0 1)) , xline(0)
 
 
 

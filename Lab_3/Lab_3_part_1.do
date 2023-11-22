@@ -22,7 +22,6 @@ use RDD_data_MLDA_deaths.dta
 
 * Question 1
 summarize
-codebook, compact
 misstable sum, all
 
 line all external internal agecell, legend(size(medsmall))
