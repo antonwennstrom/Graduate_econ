@@ -5,16 +5,17 @@
 
 LAB 3 - PART 1, Regression discontinuity
 
+Inputs: filepath (current directory)
 
 Uses data: RDD_data_MLDA_deaths.dta
 Outputs: OUTPUT_part1_data
 		 
-Last edited: 2023-11-xx
+Last edited: 2023-11-22
 
 */
 
 set more off
-cd "/Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_3"
+cd "INSERT FILEPATH"
 clear all
 capture log close
 log using logfile_lab3.log, replace
