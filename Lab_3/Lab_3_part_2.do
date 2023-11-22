@@ -40,7 +40,8 @@ reg mrate year_dummy state_dummy did
 
 
 
-//graph twoway (function y = -2*x + 40, range(-1 0)) || (function y = -3*x + 27, range(-1 0)) || (function y = -1*x + 40, range(0 1)) || (function y = -8*x + 27, range(0 1)) , xline(0)
+*Question 17
+twoway (function y = -2*x + 37, range(-1 0) lcolor(blue)) || (function y = -2*x + 26, range(-1 0) lcolor(red))  (function y = -3.5*x + 37, range(0 1) lcolor(blue))  (function y = -14.4*x + 26, range(0 1) lcolor(red)) , xline(0, lpattern(dash) lcolor(grey)) xlabel(-1 "Pre"  0 "Policy change in 1975 Intervention State" 1 "Post") legend(rows(2) order(1 "Mortality Alabama (Ext. causes)" 2 "Mortality Arkansas (Ext. causes)")) ytitle("Mortality Internal Causes (by 100.000)") xtitle("")
 
 
 
