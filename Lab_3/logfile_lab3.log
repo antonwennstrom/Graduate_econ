@@ -1,43 +1,73 @@
--------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  /Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_3/logfile_lab3.log
+       log:  /Users/hst17anwe/Documents/abc/Graduate_econ/Lab_3/logfile_lab3.log
   log type:  text
-<<<<<<< HEAD
- opened on:  22 Nov 2023, 00:47:31
-=======
- opened on:  21 Nov 2023, 14:37:37
->>>>>>> 12b4a80d8388ddf573f3143c589328546b492514
+ opened on:  22 Nov 2023, 10:45:30
 
 . use DID_deaths.dta
 
 . 
-<<<<<<< HEAD
-. * Question 1
-. summarize
-=======
-. 
-. * Generating a variable for States where the 
-. gen legal = 1 if state_name == "Alabama" &  year >= 1975
+. gen legal = 1 if state_name == "Alabama" && year >= 1975 
 (23 missing values generated)
->>>>>>> 12b4a80d8388ddf573f3143c589328546b492514
 
 . replace legal = 0 if missing(legal)
 (23 real changes made)
 
 . 
-<<<<<<< HEAD
-. twoway (line all external internal agecell), ytitle("Mortality rate") xtitle("Age cell")legend(size(medsmall))
+. // Question 15
+. gen alabama = mrate if state_name == "Alabama"
+(18 missing values generated)
+
+. gen arkansas = mrate if state_name == "Arkansas"
+(18 missing values generated)
 
 . 
-. ytitle("Mortality rate") xtitle("Year") legend(order(1 "Arkansas" 2 "Alabama"))
-command ytitle is unrecognized
-r(199);
+. twoway (scatter arkansas alabama year) (line arkansas year, lpattern(dash)) (l
+> ine alabama year, lpattern(dash)), ytitle("Mortality rate") xtitle("Year") leg
+> end(order(1 "Arkansas" 2 "Alabama"))
 
-end of do-file
+. 
+. * Question 16 Förslag på lösning
+. gen year_dummy = 1 if year >= 1975
+(10 missing values generated)
 
-r(199);
+. replace year_dummy = 0 if missing(year_dummy)
+(10 real changes made)
 
-=======
+. gen state_dummy = 1 if state_name == "Alabama"
+(18 missing values generated)
+
+. replace state_dummy = 0 if missing(state_dummy)
+(18 real changes made)
+
+. 
+. gen did = state_dummy * year_dummy
+
+. 
+. reg mrate year_dummy state_dummy did
+
+      Source |       SS           df       MS      Number of obs   =        36
+-------------+----------------------------------   F(3, 32)        =     43.64
+       Model |  3896.89812         3  1298.96604   Prob > F        =    0.0000
+    Residual |  952.559167        32   29.767474   R-squared       =    0.8036
+-------------+----------------------------------   Adj R-squared   =    0.7852
+       Total |  4849.45729        35  138.555922   Root MSE        =     5.456
+
+------------------------------------------------------------------------------
+       mrate | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  year_dummy |  -14.37324   2.871115    -5.01   0.000    -20.22151   -8.524967
+ state_dummy |   11.12956   3.450651     3.23   0.003      4.10081     18.1583
+         did |    10.2427    4.06037     2.52   0.017     1.972001    18.51341
+       _cons |    26.8037   2.439978    10.99   0.000     21.83362    31.77377
+------------------------------------------------------------------------------
+
+. 
+. 
+. twoway (lfit mrate year if state_dummy == 1 & year_dummy == 1) (line mrate yea
+> r if state_dummy ==0 & year_dummy == 0), xline(1975)
+
+. 
 . 
 . * Saving our new data and closing the logfile. 
 . save OUTPUT_part2_data, replace
@@ -45,9 +75,7 @@ file OUTPUT_part2_data.dta saved
 
 . log close
       name:  <unnamed>
-       log:  /Users/hst17anwe/Documents/nylabbar/Graduate_econ/Lab_3/logfile_lab
-> 3.log
+       log:  /Users/hst17anwe/Documents/abc/Graduate_econ/Lab_3/logfile_lab3.log
   log type:  text
- closed on:  21 Nov 2023, 14:37:37
+ closed on:  22 Nov 2023, 10:45:34
 --------------------------------------------------------------------------------
->>>>>>> 12b4a80d8388ddf573f3143c589328546b492514
