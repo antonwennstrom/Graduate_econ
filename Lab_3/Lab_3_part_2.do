@@ -14,19 +14,20 @@ Last edited: 2023-11-xx
 */
 
 set more off
-cd "/Users/emil/Documents/Stata/Lab 3"
+cd "/Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_3"
 clear all
 capture log close
 log using logfile_lab3.log, replace
 use DID_deaths.dta
 
+gen legal = 1 if state_name == "Alabama" && year >= 1975 
+replace legal = 0 if missing(legal)
 
-/* Question 15 (Förslag på graphical solution)
+// Question 15
 gen alabama = mrate if state_name == "Alabama"
 gen arkansas = mrate if state_name == "Arkansas"
 
-scatter arkansas alabama year
-*/
+twoway (scatter arkansas alabama year) (line arkansas year, lpattern(dash)) (line alabama year, lpattern(dash)), ytitle("Mortality rate") xtitle("Year") legend(order(1 "Arkansas" 2 "Alabama"))
 
 /* Question 16 Förslag på lösning
 gen year_dummy = 1 if year >= 1975

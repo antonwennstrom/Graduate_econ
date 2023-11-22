@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  /Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_2/logfile_lab1.log
   log type:  text
- opened on:  16 Nov 2023, 20:07:48
+ opened on:  19 Nov 2023, 21:50:59
 
 . use exam_results.dta
 
@@ -221,5 +221,5 @@ file OUTPUT_part1_data.dta saved
       name:  <unnamed>
        log:  /Users/vladdavid/Documents/Graduate_econometrics/Labbar/Graduate_econ/Lab_2/logfile_lab1.log
   log type:  text
- closed on:  16 Nov 2023, 20:07:53
+ closed on:  19 Nov 2023, 21:51:04
 -------------------------------------------------------------------------------------------------------------------------------------------
