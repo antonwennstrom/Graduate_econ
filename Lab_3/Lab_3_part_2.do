@@ -21,8 +21,12 @@ capture log close
 log using logfile_lab3.log, replace
 use DID_deaths.dta
 
+/*
+If one whishes to be consistent with the description of the data in the assignment, one could easily create the variable by running the following code:
 gen legal = 1 if state_name == "Alabama" && year >= 1975 
 replace legal = 0 if missing(legal)
+However we will not use this specific variable in this exercise, instead we use the "did" variable introduced in the code for question 16.
+*/
 
 // Question 15
 gen alabama = mrate if state_name == "Alabama"
@@ -30,7 +34,7 @@ gen arkansas = mrate if state_name == "Arkansas"
 
 twoway (scatter arkansas alabama year) (line arkansas year, lpattern(dash)) (line alabama year, lpattern(dash)), xline(1975) ytitle("Mortality rate") xtitle("Year") legend(order(1 "Arkansas" 2 "Alabama"))
 
-* Question 16 Förslag på lösning
+* Question 16 
 gen year_dummy = 1 if year >= 1975
 replace year_dummy = 0 if missing(year_dummy)
 gen state_dummy = 1 if state_name == "Alabama"
