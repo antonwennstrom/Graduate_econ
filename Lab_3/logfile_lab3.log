@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  /Users/hst17anwe/Documents/abc/Graduate_econ/Lab_3/logfile_lab3.log
   log type:  text
- opened on:  22 Nov 2023, 10:45:30
+ opened on:  22 Nov 2023, 12:21:26
 
 . use DID_deaths.dta
 
@@ -43,7 +43,6 @@
 . 
 . gen did = state_dummy * year_dummy
 
-. 
 . reg mrate year_dummy state_dummy did
 
       Source |       SS           df       MS      Number of obs   =        36
@@ -64,9 +63,12 @@
 
 . 
 . 
-. twoway (lfit mrate year if state_dummy == 1 & year_dummy == 1) (line mrate yea
-> r if state_dummy ==0 & year_dummy == 0), xline(1975)
+. 
+. graph twoway (function y = -2*x + 40, range(-1 0)) || (function y = -3*x + 27,
+>  range(-1 0)) || (function y = -1*x + 40, range(0 1)) || (function y = -8*x + 
+> 27, range(0 1)) , xline(0)
 
+. 
 . 
 . 
 . * Saving our new data and closing the logfile. 
@@ -77,5 +79,5 @@ file OUTPUT_part2_data.dta saved
       name:  <unnamed>
        log:  /Users/hst17anwe/Documents/abc/Graduate_econ/Lab_3/logfile_lab3.log
   log type:  text
- closed on:  22 Nov 2023, 10:45:34
+ closed on:  22 Nov 2023, 12:21:30
 --------------------------------------------------------------------------------
